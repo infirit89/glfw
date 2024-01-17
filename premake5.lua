@@ -1,7 +1,7 @@
 project "GLFW"
     language "C"
     kind "StaticLib"
-    staticruntime "on"
+    staticruntime "off"
 
     architecture "x86_64"
 
