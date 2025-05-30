@@ -78,7 +78,34 @@ project "GLFW"
         defines
         {
             "_GLFW_X11",
-            "_CRT_SECURE_NO_WARNINGS"
+        }
+
+    filter "system:macosx"
+        pic "on"
+
+        files
+        {
+            "src/cocoa_init.m",
+            "src/cocoa_monitor.m",
+            "src/cocoa_window.m",
+            "src/cocoa_platform.h",
+            "src/cocoa_time.h",
+            "src/cocoa_time.c",
+            "src/cocoa_joystick.h",
+            "src/cocoa_joystick.m",
+            "src/posix_thread.h",
+            "src/posix_thread.c",
+            "src/glx_context.h",
+            "src/glx_context.c",
+            "src/egl_context.h",
+            "src/egl_context.c",
+            "src/osmesa_context.h",
+            "src/osmesa_context.c",
+        }
+
+        defines
+        {
+            "_GLFW_COCOA",
         }
 
     filter "configurations:Debug"
