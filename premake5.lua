@@ -3,12 +3,10 @@ project "GLFW"
     kind "StaticLib"
     staticruntime "off"
 
-    architecture "x86_64"
-
     targetdir ("%{prj.location}/bin/" .. outputdir)
     objdir ("%{prj.location}/bin-int/" .. outputdir)
 
-    files 
+    files
     {
         "include/GLFW/glfw3.h",
         "include/GLFW/glfw3native.h",
@@ -18,10 +16,22 @@ project "GLFW"
         "src/input.c",
         "src/context.c",
         "src/internal.h",
-        "src/window.c"
+        "src/window.c",
+        "src/platform.c",
+        "src/osmesa_context.c",
+        "src/osmesa_context.h",
+        "src/null_platform.h",
+        "src/null_joystick.h",
+        "src/null_init.c",
+        "src/null_monitor.c",
+        "src/null_window.c",
+        "src/null_joystick.c",
+        "src/egl_context.c",
+        "src/egl_context.h",
     }
 
     filter "system:windows"
+        architecture "x86_64"
         systemversion "latest"
 
         files
@@ -37,11 +47,7 @@ project "GLFW"
             "src/win32_time.c",
             "src/win32_window.c",
             "src/wgl_context.c",
-            "src/wgl_context.h",
-            "src/egl_context.c",
-            "src/egl_context.h",
-            "src/osmesa_context.c",
-            "src/osmesa_context.h"
+            "src/wgl_context.h"
         }
 
         defines
@@ -60,8 +66,6 @@ project "GLFW"
             "src/posix_time.h",
             "src/posix_thread.h",
             "src/glx_context.h",
-            "src/egl_context.h",
-            "src/osmesa_context.h",
             "src/x11_init.c",
             "src/x11_monitor.c",
             "src/x11_window.c",
@@ -69,8 +73,6 @@ project "GLFW"
             "src/posix_time.c",
             "src/posix_thread.c",
             "src/glx_context.c",
-            "src/egl_context.c",
-            "src/osmesa_context.c",
             "src/linux_joystick.h",
             "src/linux_joystick.c",
         }
@@ -78,7 +80,32 @@ project "GLFW"
         defines
         {
             "_GLFW_X11",
-            "_CRT_SECURE_NO_WARNINGS"
+        }
+
+    filter "system:macosx"
+        architecture "ARM64"
+
+        files
+        {
+            "src/cocoa_init.m",
+            "src/cocoa_monitor.m",
+            "src/cocoa_window.m",
+            "src/cocoa_platform.h",
+            "src/cocoa_time.h",
+            "src/cocoa_time.c",
+            "src/cocoa_joystick.h",
+            "src/cocoa_joystick.m",
+            "src/posix_thread.h",
+            "src/posix_thread.c",
+            "src/posix_module.c",
+            "src/glx_context.h",
+            "src/glx_context.c",
+            "src/nsgl_context.m"
+        }
+
+        defines
+        {
+            "_GLFW_COCOA",
         }
 
     filter "configurations:Debug"
