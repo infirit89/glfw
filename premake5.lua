@@ -3,10 +3,11 @@ newoption {
     value = "server",
     description = "Which Display server to use",
     allowed = {
+        { "none", "None" },
         { "wayland", "Wayland" },
         { "x11", "X11" },
     },
-    default = "X11",
+    default = "none",
 }
 
 local wayland_protocol_dir = "deps/wayland"
